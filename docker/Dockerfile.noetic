@@ -1,0 +1,77 @@
+FROM ros:noetic-robot
+
+# Copyright (c) 2023, UNIVERSITY OF ILLINOIS URBANA-CHAMPAIGN. All rights reserved.
+
+# To build:
+# docker build -t rmdlo-multidlo:noetic -f Dockerfile.noetic ..
+
+# Set up directories and copy installation targets
+ENV HOME=/root
+ENV CATKIN_WS=${HOME}/tracking_ws
+ENV SRC=${CATKIN_WS}/src
+ENV DEVEL=${CATKIN_WS}/devel
+COPY . ${SRC}/multidlo
+COPY ./docker/requirements.txt /tmp/requirements.txt
+COPY ./docker/init_workspace.sh /tmp/init_workspace.sh
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    # Install system and development components
+    apt-utils \
+    software-properties-common \
+    build-essential \
+    cmake \
+    git \
+    python3-pip \
+    python3-catkin-tools \
+    python3-rosbag \
+    libeigen3-dev \
+    libpcl-dev \
+    libopencv-dev \
+    python3-opencv \
+    # Install required ROS components
+    ros-noetic-desktop-full \
+    ros-noetic-catkin \
+    ros-noetic-cv-bridge \
+    ros-noetic-pcl-conversions \
+    ros-noetic-pcl-ros \
+    ros-noetic-geometry-msgs \
+    ros-noetic-message-filters \
+    ros-noetic-rospy \
+    ros-noetic-sensor-msgs \
+    ros-noetic-std-msgs \
+    ros-noetic-tf \
+    ros-noetic-vision-msgs \
+    ros-noetic-visualization-msgs \
+    ros-noetic-rviz \
+    # Optionall install RealSense2 package
+    ros-noetic-realsense2-camera \
+    && apt-get -y autoremove \
+    && apt-get clean
+
+# Install required Python components
+RUN python3 -m pip install -r /tmp/requirements.txt
+
+# Copy and set up the ros_entrypoint.sh
+COPY ./docker/ros_entrypoint.sh /ros_entrypoint.sh
+RUN chmod +x /ros_entrypoint.sh
+
+# Make sure the catkin workspace is initialized
+RUN . /opt/ros/noetic/setup.sh && \
+    /tmp/init_workspace.sh
+
+# Source ROS noetic
+RUN . /opt/ros/noetic/setup.sh && \
+    ./tmp/init_workspace.sh
+
+# Set the entrypoint to ros_entrypoint.sh
+ENTRYPOINT ["/ros_entrypoint.sh"]
+
+# Default command
+CMD ["bash"]
+
+# Set Display variables for GUI applications
+ENV DISPLAY=:0
+ENV TERM=xterm
+# Some QT-Apps do not show controls without this
+ENV QT_X11_NO_MITSHM=1

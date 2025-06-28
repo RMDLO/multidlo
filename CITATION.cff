@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+authors:
+  - family-names: Xiang
+    given-names: Jingyi
+  - family-names: Dinkel
+    given-names: Holly
+title: "MultiDLO: Simultaneous Shape Tracking of Multiple Deformable Linear Objects with Global-Local Topology Preservation"
+version: 1.0.0
+url: "https://doi.org/10.48550/arXiv.2310.13245"
+date-released: '2023-05-29'
+preferred-citation:
+  authors:
+  - family-names: Xiang
+    given-names: Jingyi
+  - family-names: Dinkel
+    given-names: Holly
+  title: "MultiDLO: Simultaneous Shape Tracking of Multiple Deformable Linear Objects with Global-Local Topology Preservation"
+  url: "https://doi.org/10.48550/arXiv.2310.13245"
+  year: 2023
+  collection-title: "IEEE International Conference on Robotics and Automation Workshop on Representing and Manipulating Deformable Objects"

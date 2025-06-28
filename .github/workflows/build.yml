@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push:
+    branches: [ 'master' ]
+
+jobs:
+  build-linux:
+    strategy:
+      max-parallel: 5
+      matrix:
+        os: [ubuntu-latest, ubuntu-22.04]
+
+    runs-on: ${{matrix.os}}
+
+    steps:
+      - name: Checkout MultiDLO repository
+        uses: actions/checkout@v3
+      - name: Build, test, push base docker (Ubuntu 20.04)
+        run: cd docker && docker build -t rmdlo-multidlo:noetic -f Dockerfile.noetic ..

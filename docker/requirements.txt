@@ -1,0 +1,9 @@
+numpy>=1.22
+scipy>=1.10.0
+opencv_python==4.10.0.84
+Pillow>=10.0.1
+rosnumpy
+scikit-image==0.20.0
+pyrealsense2==2.54.1.5217
+open3d==0.13.0
+gurobipy==11.0.3
