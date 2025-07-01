@@ -6,7 +6,7 @@
   </a>
 </p>
 
-This repository contains the code for MultiDLO, an algorithm for tracking multiple DLOs from RGB-D streams. This software is an implementation of our paper, *MultiDLO: Simultaneous Shape Tracking of Multiple Deformable Linear Objects with Global-Local Topology Preservation*, by Jingyi Xiang and Holly Dinkel. All code is implemented in Python, and the paper preprint is shared [**here**](https://doi.org/10.48550/arXiv.2310.13245). 
+This repository contains the code for MultiDLO, an algorithm for tracking multiple DLOs from RGB-D streams. This software is an implementation of our paper, *MultiDLO: Simultaneous Shape Tracking of Multiple Deformable Linear Objects with Global-Local Topology Preservation*, by Jingyi Xiang and Holly Dinkel. Code is implemented in Python and C++, and the paper preprint is shared [**here**](https://doi.org/10.48550/arXiv.2310.13245). 
 
 ## Get Started
 
